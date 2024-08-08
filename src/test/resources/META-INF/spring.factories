@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory = com.congthiep.your.\
+    health.api.config.SqlTestContainersSpringContextCustomizerFactory
