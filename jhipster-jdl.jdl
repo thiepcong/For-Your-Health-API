@@ -1,0 +1,171 @@
+entity User {
+    name String
+    email String unique
+    password String
+    dateOfBirth LocalDate
+    gender String
+    height Float
+    weight Float
+    createdAt Instant
+}
+
+entity Step {
+    date LocalDate
+    steps Integer
+    minutes Integer
+    calories Float
+    createdAt Instant
+}
+
+entity Sleep {
+    date LocalDate
+    startTime LocalTime
+    endTime LocalTime
+    quality String
+    createdAt Instant
+}
+
+entity Activity {
+    date LocalDate
+    type String // 'Walking, Running, Cycling, etc.'
+    duration Duration
+    distance Float
+    calories Float
+    startLocation String
+    endLocation String
+    createdAt Instant
+}
+
+entity Food {
+    date LocalDate
+    mealType String // 'Breakfast, Lunch, Dinner, Snack'
+    calories Float
+    protein Float
+    carbs Float
+    fat Float
+    createdAt Instant
+}
+
+entity Water {
+    date LocalDate
+    amount Float
+    createdAt Instant
+}
+
+entity Leaderboard {
+    type String // 'Steps, Calories, Time'
+    value Float
+    date LocalDate
+    createdAt Instant
+}
+
+entity Group {
+    groupName String
+    creationDate LocalDate
+    createdAt Instant
+}
+
+entity GroupMember {
+    createdAt Instant
+}
+
+entity GroupLocation {
+    latitude Float
+    longitude Float
+    timestamp Instant
+}
+
+entity GroupChat {
+    message TextBlob
+    sentAt Instant
+}
+
+entity Challenge {
+    challengeName String
+    startDate LocalDate
+    endDate LocalDate
+    createdAt Instant
+}
+
+entity ChallengeProgress {
+    progressValue Float
+    date LocalDate
+    createdAt Instant
+}
+
+entity SleepSound {
+    albumName String
+    releaseDate LocalDate
+    createdAt Instant
+}
+
+entity Song {
+    songName String
+    duration Duration
+    createdAt Instant
+}
+
+entity HeartRate {
+    date LocalDate
+    time LocalTime
+    heartRate Integer
+    createdAt Instant
+}
+
+entity BloodPressure {
+    date LocalDate
+    systolic Integer
+    diastolic Integer
+    createdAt Instant
+}
+
+entity Workout {
+    workoutName String
+    type String // 'Weight Loss, Fitness, Balance, Endurance'
+    difficulty String // 'Easy, Medium, Hard'
+    duration Duration
+    createdAt Instant
+}
+
+entity WorkoutDetail {
+    exerciseName String
+    duration Duration
+    createdAt Instant
+}
+
+entity UserWorkout {
+    startDate LocalDate
+    endDate LocalDate
+    createdAt Instant
+}
+
+relationship ManyToOne {
+    Step{user} to User
+    Sleep{user} to User
+    Activity{user} to User
+    Food{user} to User
+    Water{user} to User
+    Leaderboard{user} to User
+    Group{createdBy} to User
+    GroupMember{group} to Group
+    GroupMember{user} to User
+    GroupLocation{group} to Group
+    GroupLocation{user} to User
+    GroupChat{group} to Group
+    GroupChat{user} to User
+    Challenge{group} to Group
+    ChallengeProgress{challenge} to Challenge
+    ChallengeProgress{user} to User
+    Song{album} to SleepSound
+    HeartRate{user} to User
+    BloodPressure{user} to User
+    WorkoutDetail{workout} to Workout
+    UserWorkout{user} to User
+    UserWorkout{workout} to Workout
+}
+
+paginate Step, Sleep, Activity, Food, Water, Leaderboard, Group, GroupMember, GroupLocation, GroupChat, Challenge, ChallengeProgress, SleepSound, Song, HeartRate, BloodPressure, Workout, WorkoutDetail, UserWorkout with pagination
+
+dto * with mapstruct
+
+service all with serviceImpl
